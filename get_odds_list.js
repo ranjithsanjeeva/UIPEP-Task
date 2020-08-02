@@ -6,16 +6,12 @@ function get_odds_list(count) {
   */
  let array=[];
  let j=0;
- for(let i=0;i<(2*count);i++)
+ for(let i=1;i<(2*count);i+=2)
  {
-     if(i%2!==0)
-     {
-        array[count-j-1]=i;
-        j++;
-     }
+    array[count-j-1]=i;
+    j++;
  }
 console.log(array);
-
 }
 
 console.assert([1],get_odds_list(1))
