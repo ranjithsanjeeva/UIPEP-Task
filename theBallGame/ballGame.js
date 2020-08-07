@@ -1,10 +1,16 @@
 var canvas = document.getElementById("img1");
-canvas.width=window.innerWidth-15;
+canvas.width=window.innerWidth-200;
 canvas.height=window.innerHeight-140;
 canvas.addEventListener('click',drawCircle,false);
 let running = false;
 let c=canvas.getContext("2d");
 circle = [];
+let animationFrame;
+let intervalID;
+let intervalID1;
+
+let range=document.getElementById("myRange");
+let value=range.value;
 function drawCircle(event){
 
 
@@ -18,18 +24,18 @@ function drawCircle(event){
         this.draw=function(){
             c.fillStyle=this.randomColor;
             c.beginPath();
-            c.arc(this.x,(this.y-130),this.radius,0,2*Math.PI)
+            c.arc((this.x-100),(this.y-90),this.radius,0,2*Math.PI)
             c.stroke();
             c.fill();
             this.update();
         }
 
         this.update= function(){
-            if(this.x+this.radius > innerWidth-15|| this.x-this.radius<0)
+            if(this.x+this.radius > innerWidth-100|| (this.x-100)-this.radius<0)
             {
                 this.dx=-this.dx
             }
-            if(this.y+this.radius > innerHeight-10||this.y-this.radius<140)
+            if(this.y+this.radius > innerHeight-50||this.y-this.radius<90)
             {
                 this.dy=-this.dy
             }
@@ -46,32 +52,53 @@ function drawCircle(event){
 
     console.log("outside1")
     let randomColor = "#" + Math.floor(Math.random() * 25542195).toString(16);
+    console.log(randomColor)
     let x=event.clientX;
     let y=event.clientY;
-    let dx=2*Math.random();
-    let dy=1;
-    let radius=20
+    var num1 = Math.floor(Math.random()*3) + 1; 
+    num1 *= Math.floor(Math.random()*2) == 1 ? Math.random() : -Math.random();
+    var num2 = Math.floor(Math.random()*3) + 1; // this will get a number between 1 and 99;
+    num2 *= Math.floor(Math.random()*2) == 1 ? Math.random() : -Math.random();
+    let dx= num1*3;
+    let dy= num2*3;
+    let radius=20;
     circle.push(new Circle(x,y,dx,dy,radius,randomColor))
 
-    function animate(){
+    
+    if(!intervalID) {
+        intervalID =  setInterval(animate,(20-(value/5)));
+    }
+    animate();
+
+}
+function animate(){
         //console.log("outside2")
-        requestAnimationFrame(animate);
+        // if(animationFrame){
+        //     cancelAnimationFrame(animationFrame);
+        // }
+        // animationFrame = requestAnimationFrame(animate);
     
        c.clearRect(0,0,innerWidth,innerHeight);
         //console.log("outside3")
         for(let i=0;i<circle.length;i++) {
             // circle[i].draw();
-            window.setTimeout(circle[i].draw(), 1000);
+            circle[i].draw();
            // console.log(circle);
         }
         console.log("outside4")
+        
       //  animate();
     }
-    
-    animate();
 
+function changeSpeed(k){
+  clearInterval(intervalID);
+  intervalID = setInterval(animate,(20-(k/5)));
+  console.log(k)
 }
 
+function pause(){
+    clearInterval(intervalID);
+}
 
 console.log("outside")
 // function draw(e) {
