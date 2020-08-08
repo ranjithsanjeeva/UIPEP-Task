@@ -24,7 +24,7 @@ function drawCircle(event){
         this.draw=function(){
             c.fillStyle=this.randomColor;
             c.beginPath();
-            c.arc((this.x-100),(this.y-90),this.radius,0,2*Math.PI)
+            c.arc((this.x-100),(this.y-70),this.radius,0,2*Math.PI)
             c.stroke();
             c.fill();
             this.update();
@@ -35,7 +35,7 @@ function drawCircle(event){
             {
                 this.dx=-this.dx
             }
-            if(this.y+this.radius > innerHeight-50||this.y-this.radius<90)
+            if(this.y+this.radius > innerHeight-70||this.y-this.radius<70)
             {
                 this.dy=-this.dy
             }
@@ -56,9 +56,9 @@ function drawCircle(event){
     let x=event.clientX;
     let y=event.clientY;
     var num1 = Math.floor(Math.random()*3) + 1; 
-    num1 *= Math.floor(Math.random()*2) == 1 ? Math.random() : -Math.random();
-    var num2 = Math.floor(Math.random()*3) + 1; // this will get a number between 1 and 99;
-    num2 *= Math.floor(Math.random()*2) == 1 ? Math.random() : -Math.random();
+    num1 *= Math.floor(Math.random()*2) == 1 ? Math.random() : -1;
+    var num2 = Math.floor(Math.random()*3) + 1;
+    num2 *= Math.floor(Math.random()*2) == 1 ? 1 : -Math.random();
     let dx= num1*3;
     let dy= num2*3;
     let radius=20;
@@ -98,6 +98,11 @@ function changeSpeed(k){
 
 function pause(){
     clearInterval(intervalID);
+}
+
+function play(){
+    clearInterval(intervalID);
+  intervalID = setInterval(animate,(20-(value/5)));
 }
 
 console.log("outside")
