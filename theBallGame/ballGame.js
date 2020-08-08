@@ -8,9 +8,14 @@ circle = [];
 let animationFrame;
 let intervalID;
 let intervalID1;
-
+let flag;
 let range=document.getElementById("myRange");
-let value=range.value;
+var output = document.getElementById("demo");
+
+range.oninput = function() {
+    this.style.background = 'linear-gradient(to right, #080cc0 0%, #080cc0 ' + this.value + '%, #fff ' + this.value + '%, white 100%)'
+  };
+
 function drawCircle(event){
 
 
@@ -66,7 +71,7 @@ function drawCircle(event){
 
     
     if(!intervalID) {
-        intervalID =  setInterval(animate,(20-(value/5)));
+        intervalID =  setInterval(animate,(20-(range.value/5)));
     }
     animate();
 
@@ -91,18 +96,24 @@ function animate(){
     }
 
 function changeSpeed(k){
-  clearInterval(intervalID);
-  intervalID = setInterval(animate,(20-(k/5)));
-  console.log(k)
+    output.innerHTML = k+"%";
+    if(!flag)
+    {
+        clearInterval(intervalID);
+        intervalID = setInterval(animate,(20-(k/5)));
+        console.log(k)
+    }
 }
 
 function pause(){
     clearInterval(intervalID);
+    flag=true;
 }
 
 function play(){
+    
     clearInterval(intervalID);
-  intervalID = setInterval(animate,(20-(value/5)));
+  intervalID = setInterval(animate,(20-(range.value/5)));
 }
 
 console.log("outside")
