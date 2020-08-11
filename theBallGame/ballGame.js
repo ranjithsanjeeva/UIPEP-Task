@@ -166,7 +166,7 @@ function drawCircle(event) {
         }
 
         this.update = function () {
-            if (this.x + this.radius > innerWidth - 100 || (this.x - 100) - this.radius < 0) {
+            if (this.x + this.radius > innerWidth - 105 || (this.x - 100) - this.radius < 0) {
                 this.dx = -this.dx
             }
             if (this.y + this.radius > innerHeight - 70 || this.y - this.radius < 70) {
@@ -189,22 +189,27 @@ function drawCircle(event) {
     console.log(randomColor)
     let x = event.clientX;
     let y = event.clientY;
-    var num1 = Math.floor(Math.random() * 3) + 1;
-    num1 *= Math.floor(Math.random() * 2) == 1 ? Math.random() : -1;
-    var num2 = Math.floor(Math.random() * 3) + 1;
-    num2 *= Math.floor(Math.random() * 2) == 1 ? 1 : -Math.random();
-    let dx = 3;
-    let dy = 3;
-    if (isRandomX) {
-        dx = (Math.random() * 3) * 3;
-        dy = 10 - dx;
-    }
-    else {
-        dy = (Math.random() * 3) * 3;
-        dx = 10 - dy;
+    // var num1 = Math.floor(Math.random() * 3) + 1;
+    // num1 *= Math.floor(Math.random() * 2) == 1 ? Math.random() : -1;
+    // var num2 = Math.floor(Math.random() * 3) + 1;
+    // num2 *= Math.floor(Math.random() * 2) == 1 ? 1 : -Math.random();
+    // let dx = 3;
+    // let dy = 3;
+    // if (isRandomX) {
+    //     dx = (Math.random() * 3) * 3;
+    //     dy = 10 - dx;
+    // }
+    // else {
+    //     dy = (Math.random() * 3) * 3;
+    //     dx = 10 - dy;
+    // }
+    // isRandomX = !isRandomX;
+    let speed=5;
+    let angle=Math.floor(Math.random()*360);
+    let rad=angle*(Math.PI/180);
 
-    }
-    isRandomX = !isRandomX;
+    dx=Math.cos(rad)*speed;
+    dy=Math.sin(rad)*speed
 
     let radius = 20;
 
